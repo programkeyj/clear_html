@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+     <head>
+	 <meta charset="UTF-8">
+	 <title>Canvas</title>
+	 </head>
+	 
+	 <body style="margin: 0;">
+	    <a href='file:///D:/django/HTML/ways/canvas/one.html'>next</a>
+	 
+	    <canvas style='display: block;' id='canvas'>your browsrer is very old..</canvas>
+	     
+		<script>
+		    var
+			   canv  = document.getElementById('canvas'),
+			   ctx     = canv.getContext('2d');
+			   isMD = false;
+			   coords =  []
+			   
+			canv.width=window.innerWidth;
+			canv.height=window.innerHeight;
+			
+			canv.addEventListener('mousedown', function() {
+			isMD= true;
+			
+			});canv.addEventListener('mouseup', function() {
+			isMD= false;
+			ctx.beginPath();
+			});		
+			
+			ctx.lineWidth = 10 * 2;
+			canv.addEventListener('mousemove', function(e) {
+			
+			     if( isMD )
+				 {
+				    cords.push([e.clientX, e.clientY]);
+				    ctx.lineTo(e.clientX, e.clientY);
+					ctx.stroke();
+				 
+			        ctx.beginPath();
+				    ctx.arc(e.clientX, e.clientY, 10, 0, Math.PI * 2);
+				    ctx.fill();
+					
+					ctx.beginPath()
+					ctx.moveTo(e.clientX, e.clientY);
+				 }
+			});
+			)
+			{
+			    LocalStorage.setItem('coords', JSON.stringify(coords));
+			    var
+				    timer = setInterval(function() {
+					if( !coords.length )
+					{
+					    clearInterval(timer);
+						ctx.beginPath();
+						return;
+					}
+					var
+					   crd = coords.shift(),
+					   e = {
+					       clientX: crd['0'],
+						   clientY: crd['1'] 
+					   };
+	
+				    ctx.lineTo(e.clientX, e.clientY);
+					ctx.stroke();
+				 
+			        ctx.beginPath();
+				    ctx.arc(e.clientX, e.clientY, 10, 0, Math.PI * 2);
+				    ctx.fill();
+					
+					ctx.beginPath()
+					ctx.moveTo(e.clientX, e.clientY);					
+				}, 30)
+			}
+			})
+			
+		</script> 
+	 </body>
+</html>	 
